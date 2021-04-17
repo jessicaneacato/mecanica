@@ -23,6 +23,7 @@ Partial Class Ventas
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
+        Me.btnModificar = New System.Windows.Forms.Button
         Me.cbxCliente = New System.Windows.Forms.ComboBox
         Me.Label2 = New System.Windows.Forms.Label
         Me.btnEliminar = New System.Windows.Forms.Button
@@ -40,7 +41,6 @@ Partial Class Ventas
         Me.txtBuscar = New System.Windows.Forms.TextBox
         Me.Label6 = New System.Windows.Forms.Label
         Me.btnSalir = New System.Windows.Forms.Button
-        Me.btnModificar = New System.Windows.Forms.Button
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvVentas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -67,6 +67,15 @@ Partial Class Ventas
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Datos Venta"
+        '
+        'btnModificar
+        '
+        Me.btnModificar.Location = New System.Drawing.Point(499, 89)
+        Me.btnModificar.Name = "btnModificar"
+        Me.btnModificar.Size = New System.Drawing.Size(95, 33)
+        Me.btnModificar.TabIndex = 14
+        Me.btnModificar.Text = "Modificar"
+        Me.btnModificar.UseVisualStyleBackColor = True
         '
         'cbxCliente
         '
@@ -227,15 +236,6 @@ Partial Class Ventas
         Me.btnSalir.TabIndex = 3
         Me.btnSalir.Text = "Salir"
         Me.btnSalir.UseVisualStyleBackColor = True
-        '
-        'btnModificar
-        '
-        Me.btnModificar.Location = New System.Drawing.Point(499, 89)
-        Me.btnModificar.Name = "btnModificar"
-        Me.btnModificar.Size = New System.Drawing.Size(95, 33)
-        Me.btnModificar.TabIndex = 14
-        Me.btnModificar.Text = "Modificar"
-        Me.btnModificar.UseVisualStyleBackColor = True
         '
         'Ventas
         '

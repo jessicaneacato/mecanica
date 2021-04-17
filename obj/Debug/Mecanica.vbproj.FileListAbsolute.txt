@@ -24,3 +24,6 @@ C:\Users\ALEXANDRA\Documents\Visual Studio 2008\Projects\Mecanica\obj\Debug\Meca
 C:\Users\ALEXANDRA\Documents\Visual Studio 2008\Projects\Mecanica\obj\Debug\Mecanica.ClientesReparaciones.resources
 C:\Users\ALEXANDRA\Documents\Visual Studio 2008\Projects\Mecanica\obj\Debug\Mecanica.ClientesCompras.resources
 C:\Users\ALEXANDRA\Documents\Visual Studio 2008\Projects\Mecanica\obj\Debug\Mecanica.MenuCliente.resources
+C:\Users\ALEXANDRA\Documents\Visual Studio 2008\Projects\Mecanica\obj\Debug\Mecanica.ReporteVentas.resources
+C:\Users\ALEXANDRA\Documents\Visual Studio 2008\Projects\Mecanica\obj\Debug\Mecanica.MenuSecretaria.resources
+C:\Users\ALEXANDRA\Documents\Visual Studio 2008\Projects\Mecanica\obj\Debug\Mecanica.ReporteReparaciones.resources

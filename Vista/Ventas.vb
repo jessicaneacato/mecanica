@@ -110,7 +110,7 @@ Public Class Ventas
         Return valido
     End Function
 
-    Private Sub dgvVentas_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvVentas.CellContentClick
+    Private Sub dgvVentas_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvVentas.CellContentClick, dgvVentas.CellClick
 
         Try
             idVenta = dgvVentas.Rows(e.RowIndex).Cells(0).Value

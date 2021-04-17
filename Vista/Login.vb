@@ -25,8 +25,10 @@ Public Class Login
             MsgBox("Bienvenido/a " + leer("usuario"))
             If (tipo = 1) Then
                 MenuEmpleado.Show()
-            Else
-                '
+            ElseIf (tipo = 2) Then
+                MenuSecretaria.Show()
+            ElseIf (tipo = 3) Then
+                MenuSecretaria.Show()
             End If
             Me.Hide()
         Else

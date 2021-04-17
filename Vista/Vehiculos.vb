@@ -156,7 +156,7 @@ Public Class Vehiculos
         Return valido
     End Function
 
-    Private Sub dgvVehiculos_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvVehiculos.CellContentClick
+    Private Sub dgvVehiculos_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvVehiculos.CellContentClick, dgvVehiculos.CellClick
 
         Try
             idVehiculo = dgvVehiculos.Rows(e.RowIndex).Cells(0).Value

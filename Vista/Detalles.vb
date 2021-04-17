@@ -217,7 +217,7 @@ Public Class Detalles
         Return valido
     End Function
 
-    Private Sub dgvDetalles_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvDetalles.CellContentClick
+    Private Sub dgvDetalles_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvDetalles.CellContentClick, dgvDetalles.CellClick
 
         Try
             idDetalle = dgvDetalles.Rows(e.RowIndex).Cells(0).Value

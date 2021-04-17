@@ -14,17 +14,17 @@ Public Class Empleados
         conexion = New SqlConnection("Data Source=LAPTOP-A9Q4NKMU\SQLEXPRESS;Initial Catalog=mecanica;Integrated Security=True")
         idEmpleado = 0
         Cargar_DGVEmpleados()
-
+        Cargar_Tipo_Usuarios()
     End Sub
 
   
     Private Sub Cargar_DGVEmpleados()
         conexion.Open()
-        sentencia = New SqlCommand("select c.*,u.id_usuario,u.usuario from empleados c inner join usuarios u ON u.id_usuario=c.usuario_id", conexion)
+        sentencia = New SqlCommand("select c.*,u.id_usuario,u.usuario,tu.tipo from empleados c inner join usuarios u ON u.id_usuario=c.usuario_id INNER JOIN tipo_usuarios tu ON tu.id_tipo_usuario=u.tipo_usuario_id", conexion)
 
         leer = sentencia.ExecuteReader
 
-        dgvEmpleados.ColumnCount = 7
+        dgvEmpleados.ColumnCount = 8
         dgvEmpleados.Columns(0).Name = "ID"
         dgvEmpleados.Columns(1).Name = "Cédula"
         dgvEmpleados.Columns(2).Name = "Nombre"
@@ -32,11 +32,12 @@ Public Class Empleados
         dgvEmpleados.Columns(4).Name = "Teléfono"
         dgvEmpleados.Columns(5).Name = "Dirección"
         dgvEmpleados.Columns(6).Name = "Usuario"
+        dgvEmpleados.Columns(7).Name = "Tipo"
         dgvEmpleados.Rows.Clear()
         While leer.Read
             'MsgBox(r.ToString)
-            Dim fila(7) As String
-            fila = New String() {leer("id_empleado"), leer("cedula"), leer("nombres"), leer("apellidos"), leer("telefono"), leer("direccion"), leer("usuario")}
+            Dim fila(8) As String
+            fila = New String() {leer("id_empleado"), leer("cedula"), leer("nombres"), leer("apellidos"), leer("telefono"), leer("direccion"), leer("usuario"), leer("tipo")}
             dgvEmpleados.Rows.Add(fila)
         End While
         conexion.Close()
@@ -44,14 +45,14 @@ Public Class Empleados
 
     Private Sub Buscar_empleado()
         conexion.Open()
-        sentencia = New SqlCommand("select c.*,u.id_usuario,u.usuario from empleados c inner join usuarios u ON u.id_usuario=c.usuario_id WHERE c.nombres LIKE @buscar OR c.apellidos LIKE @buscar OR cedula LIKE @buscar", conexion)
+        sentencia = New SqlCommand("select c.*,u.id_usuario,u.usuario,tu.tipo from empleados c inner join usuarios u ON u.id_usuario=c.usuario_id INNER JOIN tipo_usuarios tu ON tu.id_tipo_usuario=u.tipo_usuario_id WHERE c.nombres LIKE @buscar OR c.apellidos LIKE @buscar OR cedula LIKE @buscar OR tu.tipo LIKE @buscar", conexion)
 
         sentencia.Parameters.Add("@buscar", SqlDbType.VarChar, 50)
         sentencia.Parameters("@buscar").Value = "%" + txtBuscar.Text + "%"
 
         leer = sentencia.ExecuteReader
 
-        dgvEmpleados.ColumnCount = 7
+        dgvEmpleados.ColumnCount = 8
         dgvEmpleados.Columns(0).Name = "ID"
         dgvEmpleados.Columns(1).Name = "Cédula"
         dgvEmpleados.Columns(2).Name = "Nombre"
@@ -59,11 +60,12 @@ Public Class Empleados
         dgvEmpleados.Columns(4).Name = "Teléfono"
         dgvEmpleados.Columns(5).Name = "Dirección"
         dgvEmpleados.Columns(6).Name = "Usuario"
+        dgvEmpleados.Columns(7).Name = "Tipo"
         dgvEmpleados.Rows.Clear()
         While leer.Read
             'MsgBox(r.ToString)
-            Dim fila(7) As String
-            fila = New String() {leer("id_empleado"), leer("cedula"), leer("nombres"), leer("apellidos"), leer("telefono"), leer("direccion"), leer("usuario")}
+            Dim fila(8) As String
+            fila = New String() {leer("id_empleado"), leer("cedula"), leer("nombres"), leer("apellidos"), leer("telefono"), leer("direccion"), leer("usuario"), leer("tipo")}
             dgvEmpleados.Rows.Add(fila)
         End While
         conexion.Close()
@@ -79,6 +81,7 @@ Public Class Empleados
         txtUsuario.Text = ""
         txtClave.Text = ""
         txtUsuario.Enabled = True
+        cbxTipoUsuario.SelectedValue = 0
         Cargar_DGVEmpleados()
     End Sub
 
@@ -88,14 +91,16 @@ Public Class Empleados
             conexion.Open()
             If (Validar()) Then
                 If (idEmpleado = 0) Then
-                    sql = "INSERT INTO usuarios(usuario,clave,tipo_usuario_id) OUTPUT INSERTED.id_usuario VALUES(@usuario,@clave,1)"
+                    sql = "INSERT INTO usuarios(usuario,clave,tipo_usuario_id) OUTPUT INSERTED.id_usuario VALUES(@usuario,@clave,@tipo_usuario)"
 
                     sentencia = New SqlCommand(sql, conexion)
                     sentencia.Parameters.Add("@usuario", SqlDbType.VarChar, 20)
                     sentencia.Parameters.Add("@clave", SqlDbType.VarChar, 20)
+                    sentencia.Parameters.Add("@tipo_usuario", SqlDbType.Int)
 
                     sentencia.Parameters("@usuario").Value = txtUsuario.Text
                     sentencia.Parameters("@clave").Value = txtClave.Text
+                    sentencia.Parameters("@tipo_usuario").Value = cbxTipoUsuario.SelectedValue
                     'Devuelve la id del último usuario ingresado
                     Dim idUsuario As Integer
                     idUsuario = sentencia.ExecuteScalar()
@@ -122,14 +127,16 @@ Public Class Empleados
                     MsgBox("Se ha guardado con éxito")
                     Limpiar()
                 Else
-                    sql = "UPDATE usuarios SET clave=@clave WHERE usuario=@usuario"
+                    sql = "UPDATE usuarios SET clave=@clave,tipo_usuario_id=@tipo_usuario_id WHERE usuario=@usuario"
 
                     sentencia = New SqlCommand(sql, conexion)
                     sentencia.Parameters.Add("@usuario", SqlDbType.VarChar, 20)
                     sentencia.Parameters.Add("@clave", SqlDbType.VarChar, 20)
+                    sentencia.Parameters.Add("@tipo_usuario_id", SqlDbType.Int)
 
                     sentencia.Parameters("@usuario").Value = txtUsuario.Text
                     sentencia.Parameters("@clave").Value = txtClave.Text
+                    sentencia.Parameters("@tipo_usuario_id").Value = cbxTipoUsuario.SelectedValue
                     'Devuelve la id del último usuario ingresado
                     sentencia.ExecuteNonQuery()
 
@@ -200,6 +207,10 @@ Public Class Empleados
             valido = False
             msg += " Contraseña."
         End If
+        If (cbxTipoUsuario.SelectedValue = 0) Then
+            valido = False
+            msg += " Tipo Usuario."
+        End If
 
         If (Not valido) Then
             MsgBox(msg)
@@ -207,12 +218,12 @@ Public Class Empleados
         Return valido
     End Function
 
-    Private Sub dgvEmpleados_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvEmpleados.CellContentClick
+    Private Sub dgvEmpleados_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvEmpleados.CellContentClick, dgvEmpleados.CellClick
         idEmpleado = dgvEmpleados.Rows(e.RowIndex).Cells(0).Value
 
         Try
             conexion.Open()
-            sentencia = New SqlCommand("SELECT * FROM empleados c INNER JOIN usuarios u ON c.usuario_id=u.id_usuario WHERE c.id_empleado = @idEmpleado", conexion)
+            sentencia = New SqlCommand("SELECT * FROM empleados c INNER JOIN usuarios u ON c.usuario_id=u.id_usuario INNER JOIN tipo_usuarios tu ON tu.id_tipo_usuario=u.tipo_usuario_id WHERE c.id_empleado = @idEmpleado", conexion)
             sentencia.Parameters.Add("@idEmpleado", SqlDbType.Int)
 
             sentencia.Parameters("@idEmpleado").Value = idEmpleado
@@ -226,6 +237,7 @@ Public Class Empleados
                 txtDireccion.Text = leer("direccion")
                 txtUsuario.Text = leer("usuario")
                 txtClave.Text = leer("clave")
+                cbxTipoUsuario.SelectedValue = leer("id_tipo_usuario")
                 txtUsuario.Enabled = False
             Else
                 MsgBox("Hubo un error al obtener empleado")
@@ -281,5 +293,25 @@ Public Class Empleados
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         MenuEmpleado.Show()
         Me.Close()
+    End Sub
+
+    Private Sub Cargar_Tipo_Usuarios()
+        Dim da As New SqlClient.SqlDataAdapter("select * from tipo_usuarios", conexion)
+        Dim ds As New DataSet()
+        da.Fill(ds)
+
+        Dim dr As DataRow
+        dr = ds.Tables(0).NewRow
+        dr("tipo") = "Seleccione"
+        dr("id_tipo_usuario") = 0
+        ds.Tables(0).Rows.Add(dr)
+
+        cbxTipoUsuario.DisplayMember = "tipo"
+
+        cbxTipoUsuario.ValueMember = "id_tipo_usuario"
+
+        cbxTipoUsuario.DataSource = ds.Tables(0)
+        cbxTipoUsuario.SelectedValue = 0
+        conexion.Close()
     End Sub
 End Class

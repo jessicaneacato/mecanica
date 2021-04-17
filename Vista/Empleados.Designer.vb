@@ -47,6 +47,8 @@ Partial Class Empleados
         Me.Label8 = New System.Windows.Forms.Label
         Me.txtUsuario = New System.Windows.Forms.TextBox
         Me.Label7 = New System.Windows.Forms.Label
+        Me.cbxTipoUsuario = New System.Windows.Forms.ComboBox
+        Me.Label9 = New System.Windows.Forms.Label
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvEmpleados, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -249,6 +251,8 @@ Partial Class Empleados
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Label9)
+        Me.GroupBox3.Controls.Add(Me.cbxTipoUsuario)
         Me.GroupBox3.Controls.Add(Me.txtClave)
         Me.GroupBox3.Controls.Add(Me.Label8)
         Me.GroupBox3.Controls.Add(Me.txtUsuario)
@@ -263,7 +267,7 @@ Partial Class Empleados
         '
         'txtClave
         '
-        Me.txtClave.Location = New System.Drawing.Point(18, 125)
+        Me.txtClave.Location = New System.Drawing.Point(18, 93)
         Me.txtClave.Name = "txtClave"
         Me.txtClave.Size = New System.Drawing.Size(218, 26)
         Me.txtClave.TabIndex = 3
@@ -272,7 +276,7 @@ Partial Class Empleados
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(15, 96)
+        Me.Label8.Location = New System.Drawing.Point(15, 72)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(92, 18)
         Me.Label8.TabIndex = 2
@@ -280,7 +284,7 @@ Partial Class Empleados
         '
         'txtUsuario
         '
-        Me.txtUsuario.Location = New System.Drawing.Point(18, 55)
+        Me.txtUsuario.Location = New System.Drawing.Point(18, 43)
         Me.txtUsuario.Name = "txtUsuario"
         Me.txtUsuario.Size = New System.Drawing.Size(218, 26)
         Me.txtUsuario.TabIndex = 1
@@ -288,11 +292,28 @@ Partial Class Empleados
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(15, 26)
+        Me.Label7.Location = New System.Drawing.Point(15, 22)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(66, 18)
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Usuario"
+        '
+        'cbxTipoUsuario
+        '
+        Me.cbxTipoUsuario.FormattingEnabled = True
+        Me.cbxTipoUsuario.Location = New System.Drawing.Point(18, 143)
+        Me.cbxTipoUsuario.Name = "cbxTipoUsuario"
+        Me.cbxTipoUsuario.Size = New System.Drawing.Size(218, 26)
+        Me.cbxTipoUsuario.TabIndex = 4
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(15, 122)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(105, 18)
+        Me.Label9.TabIndex = 5
+        Me.Label9.Text = "Tipo Usuario"
         '
         'Empleados
         '
@@ -343,4 +364,6 @@ Partial Class Empleados
     Friend WithEvents txtClave As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents btnEliminar As System.Windows.Forms.Button
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents cbxTipoUsuario As System.Windows.Forms.ComboBox
 End Class

@@ -153,7 +153,7 @@ Public Class Productos
         Return valido
     End Function
 
-    Private Sub dgvProductos_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvProductos.CellContentClick
+    Private Sub dgvProductos_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvProductos.CellContentClick, dgvProductos.CellClick
 
         Try
             idProducto = dgvProductos.Rows(e.RowIndex).Cells(0).Value

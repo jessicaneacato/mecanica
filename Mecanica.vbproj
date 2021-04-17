@@ -143,6 +143,24 @@
     <Compile Include="Vista\ClientesCompras.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Vista\ReporteReparaciones.Designer.vb">
+      <DependentUpon>ReporteReparaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\ReporteReparaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\ReporteVentas.Designer.vb">
+      <DependentUpon>ReporteVentas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\ReporteVentas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\MenuSecretaria.Designer.vb">
+      <DependentUpon>MenuSecretaria.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\MenuSecretaria.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Vista\DatosCliente.Designer.vb">
       <DependentUpon>DatosCliente.vb</DependentUpon>
     </Compile>
@@ -250,6 +268,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\ClientesCompras.resx">
       <DependentUpon>ClientesCompras.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\ReporteReparaciones.resx">
+      <DependentUpon>ReporteReparaciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\ReporteVentas.resx">
+      <DependentUpon>ReporteVentas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\MenuSecretaria.resx">
+      <DependentUpon>MenuSecretaria.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\DatosCliente.resx">
       <DependentUpon>DatosCliente.vb</DependentUpon>
